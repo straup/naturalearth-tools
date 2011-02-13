@@ -18,7 +18,7 @@ do
 
     echo "[${TABLE}] reproject"
 
-    # ${OGR2OGR} -f "ESRI Shapefile" -t_srs EPSG:900913 ${MERC}/900913_${BASE} ${DIR}/${BASE} 
+    ${OGR2OGR} -f "ESRI Shapefile" -t_srs EPSG:900913 ${MERC}/900913_${BASE} ${DIR}/${BASE} 
 
     echo "[${TABLE}] prepare sql"
 
