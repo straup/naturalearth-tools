@@ -14,7 +14,8 @@ do
     DIR=`dirname ${SHP}`
     BASE=`basename ${SHP}`
 
-    TABLE=`echo ${BASE} | awk '{split($0, parts, "."); print parts[1]}'`
+    TABLE=`perl -e '$ARGV[0] =~ /^((?:\d+)m)_(.*)\.shp$/; print "$2_$1";' ${BASE}`
+    # TABLE=`echo ${BASE} | awk '{split($0, parts, "."); print parts[1]}'`
 
     echo "[${TABLE}] reproject"
 
