@@ -1,0 +1,13 @@
+# These are incomplete notes for processing NaturalEarth shapes so that polygons
+# crossing the 180° meridian don't wrap around and look weird (wrong). As usual
+# all the credit goes to Dane Springmeyer who actually figured it out.
+
+# See also: cleanGeometry.sql
+
+* imported shapefile with shp2pgsql
+
+* update land set the_geom = cleanGeometry(the_geom);
+
+* dumped back out with pgsql2shp
+
+* ogr reproject/clip
