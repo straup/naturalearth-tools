@@ -6,6 +6,7 @@ PSQL=`which psql`
 
 ROOT=$1
 MERC="${ROOT}/900913"
+GOOG="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
 
 mkdir -p ${MERC}
 rm -f ${MERC}/*
@@ -20,7 +21,7 @@ do
 
     echo "[${TABLE}] reproject"
 
-    ${OGR2OGR} -f "ESRI Shapefile" -t_srs EPSG:900913 ${MERC}/900913_${BASE} ${DIR}/${BASE}
+    ${OGR2OGR} -f "ESRI Shapefile" -t_srs ${GOOG} ${MERC}/900913_${BASE} ${DIR}/${BASE}
 
     echo "[${TABLE}] prepare sql"
 
