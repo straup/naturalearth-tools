@@ -8,6 +8,7 @@ ROOT=$1
 MERC="${ROOT}/900913"
 
 mkdir -p ${MERC}
+rm -f ${MERC}/*
 
 for SHP in `ls -a ${ROOT}/*.shp`
 do
@@ -19,15 +20,14 @@ do
 
     echo "[${TABLE}] reproject"
 
-    ${OGR2OGR} -f "ESRI Shapefile" -t_srs EPSG:900913 ${MERC}/900913_${BASE} ${DIR}/${BASE} 
+    ${OGR2OGR} -f "ESRI Shapefile" -t_srs EPSG:900913 ${MERC}/900913_${BASE} ${DIR}/${BASE}
 
     echo "[${TABLE}] prepare sql"
 
-    ${SHP2PGSQL} -s 900913 -c -I ${MERC}/900913_${BASE} ${TABLE} > ${MERC}/900913_${TABLE}.sql
+    ${SHP2PGSQL} -s 900913 -W WINDOWS-1252 -c -I ${MERC}/900913_${BASE} ${TABLE} > ${MERC}/900913_${TABLE}.sql
 
     echo "[${TABLE}] import sql"
 
     ${PSQL} -U naturalearth < ${MERC}/900913_${TABLE}.sql
 
 done
-    
